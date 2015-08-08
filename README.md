@@ -93,7 +93,9 @@ export default class Button extends React.Component {
 }
 ```
 
-And that is it!! seriously! At small components you will have zero references to css, for medium/large components you can combine stylium to normal className={css.elemenClass}
+And that is it!! seriously! 
+
+For small components you will have zero classname references, for medium/large ones you can combine stylium  and regular className={css.elemenClass}
 
 Output will be something like:
 

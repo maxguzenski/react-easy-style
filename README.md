@@ -124,6 +124,7 @@ Right now, I'm updating a medium size project using this concept, along the way 
 
 **Please, if you like, talk to me and help!**
 
+ps.: I know, project name sucks! But I think that all cool names was taken...maybe I'll change it to 'react-got-style', I don't know...
 
 
 

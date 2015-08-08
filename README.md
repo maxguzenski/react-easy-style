@@ -93,7 +93,7 @@ export default class Button extends React.Component {
 }
 ```
 
-And that is it!! seriously!
+And that is it!! seriously! At small components you will have zero references to css, for medium/large components you can combine stylium to normal className={css.elemenClass}
 
 Output will be something like:
 
@@ -105,7 +105,25 @@ Output will be something like:
 
 
 ##Future?
-Right now, I'm updating a medium size project using this concept, along the way I'll commit new features and ideas. But please, if you like, talk to me and help!  
+Right now, I'm updating a medium size project using this concept, along the way I'll commit new features and ideas. Maybe Stylium could does something like this:
+
+```javascript
+// ref your nested components with react.refs
+<div ref='root'>
+  <div ref='nested1'/>
+  <div ref='nested2'/>
+</div>
+
+// Then you can let other calls your component like that:
+<Component rootClass='home withicons' rootStyles={padding: 2} nested1Style={color: '#ccc'} />
+
+//
+// and stylium garantee that all class (from css or from properties) and styles goes to correct elements.
+//
+```
+
+**Please, if you like, talk to me and help!**
+
 
 
 

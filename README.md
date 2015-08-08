@@ -9,16 +9,16 @@ The React community is highly fragmented when it comes to styling. Right now, th
 
 After all there's two project that came with very cool ideas: 
 
-1) react-css that looks like to be the only one that notice that style and react props/state are very tight one to another.  
+1) [ReactCSS](http://reactcss.com/) that looks like to be the only one that notice that style and react props/state are very tight one to another.  
 
-2) Css-module, that without loose the power of css, fixed global scope issue.
+2) [css-modules](https://github.com/css-modules/css-modules), that without loose the power of css, fixed global scope issue.
 
-This project try to put to gather reactccss and css-module into a simple and very small library.   
+This project try to put to gather reactccss and css-modules into a simple and very small library.   
 
 
 ##How? 
 
-Create you css/sass/less using :local from css-module:
+Create your css/sass/less normally, using :local from css-modules:
 
 ```sass
 
@@ -100,7 +100,7 @@ export default class Button extends React.Component {
 }
 ```
 
-And that is it!! Nothing more!
+And that is it!! seriously!
 
 Output will be something like:
 

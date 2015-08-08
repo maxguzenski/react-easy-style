@@ -78,13 +78,6 @@ import Stylium from '../stylium'
 
 @Stylium( css )
 export default class Button extends React.Component {
-  static propTypes = {
-    circle: React.PropTypes.bool,
-    kind: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    size: React.PropTypes.string,
-  }
-
   static defaultProps = {
     size: 'sm', kind: 'primary'
   }

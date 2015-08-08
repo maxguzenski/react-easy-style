@@ -21,38 +21,22 @@ This project try to put to gather reactccss and css-modules into a simple and ve
 Create your css/sass/less normally, using :local from css-modules:
 
 ```sass
-
 :local .root {
-  background-color: transparent;
-  background-image: none;
   border: 1px solid transparent;
-  cursor: pointer;
-  display: inline-block;
-  margin: 0px;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  white-space: nowrap;
+  // a lot of other styles
 
-  -webkit-appearance: none;
-  user-select: none;
-
-  //
   // browser state rules
-  //
   &:focus,
   &:hover { text-decoration: none; }
   &:focus { outline: none; }
 
-  //
   // React props/state rules
   //   final result: root--propsName-propsValue
-  //   use sample: <Button disabled={true} size='lg' />
+  //   use sample: <Button disabled={true} size='lg' circle={true} />
   //
-  &--disabled-true {
-    opacity: 0.65; box-shadow: none;
-  }
-
+  &--disabled-true { opacity: 0.65; box-shadow: none; }
+  &--circle-true { border-radius: 50% }
+  
   &--kind-default { /*...*/ }
   &--kind-primary { /*...*/ }
   &--kind-success { /*...*/ }
@@ -60,12 +44,6 @@ Create your css/sass/less normally, using :local from css-modules:
   &--size-lg { /*...*/ }
   &--size-sm { /*...*/ }
   &--size-xs { /*...*/ }
-  
-  
-
-  &--circle-true {
-    border-radius: 50%
-  }
 }
 ```
 

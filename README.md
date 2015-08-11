@@ -1,4 +1,4 @@
-# react-easy-style
+# React Easy Style
 
 A tiny library to easy apply css/styles to react components.
 
@@ -8,14 +8,17 @@ A tiny library to easy apply css/styles to react components.
 
 `npm install react-easy-style`
 
+you'll need also:
+`webpack`, `css-loader`, `react`
+
 ## Why?
 The React community is highly fragmented when it comes to styling. Right now, there is more then 16 project for inline css on the github, all of they are trying to fix some "issue" that css has, like global scope... but, I think, they all are creating a lot of new one as well.
+
+**React Easy Style** "borrow" ideas from some one of this project: react-css (1). And join it with webpack css-loader (2) to make a very light and useful library to easy use classes and styles on react components.
 
 1. [react-css](http://reactcss.com/): seems to be the only one to have noticed that style and react props/state are strong linked to each other.
 
 2. [webpack css-loader](https://github.com/webpack/css-loader): with support to [CSS Module spec](https://github.com/css-modules/css-modules) has fixed css global scope issue.
-
-This project "borrow" ideas from react-css and join with webpack css-loader to make a very light and useful library to easy use classes and styles on react components.
 
 
 ## How?
@@ -233,6 +236,20 @@ class Col extends React.Component {}
 :local .row { /** ... **/ }
 :local .col { /** ... **/ }
 ```
+
+## Example of webpack config to use css-loader
+
+```javascript
+// webpack.config.js
+module: {
+  loaders: [
+    { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: 'babel?stage=0' },
+    { test: /\.scss$/, loader: "style!css!sass" },
+    { test: /\.css$/, loader: "style!css" }
+  ]
+}
+```
+
 
 
 ## All this is pretty cool... but I want to use inline styles.

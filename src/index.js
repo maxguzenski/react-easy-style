@@ -82,12 +82,13 @@ export default function EasyStyle(styleOrClass, rootName='root') {
       const allProps = {...this.state, ...this.props}
 
       for (let k in allProps) {
-        const v = allProps[k]
-        propsKlzz.push(getStyleProp(k,v))
+        const v  = allProps[k]
+        const sp = getStyleProp(k, v)
+        sp && propsKlzz.push(sp)
       }
     }
 
-    const className = cx(
+    let className = cx(
       isClass ? styleOrClass[isName] : null,
       isClass ? propsKlzz : null,
       node.props.className,
@@ -95,11 +96,15 @@ export default function EasyStyle(styleOrClass, rootName='root') {
       {[this.props.className]: isRoot && this.props.className}
     )
 
+    if (className === '') {
+      className = null
+    }
+
     //
-    // ok, let see style now
+    // ok, let see styles now
     //
 
-    const mergePropsKlzz = () => {
+    const propsKlzzReducer = () => {
       return propsKlzz.reduce( (memo, item) => {
         memo = {...memo, ...item}
         return memo
@@ -108,7 +113,7 @@ export default function EasyStyle(styleOrClass, rootName='root') {
 
     const propsIfStyle = isClass ? {} : {
       ...( styleOrClass['base'] && styleOrClass['base'][isName] ),
-      ...( mergePropsKlzz() )
+      ...( propsKlzzReducer() )
     }
 
     const style = {

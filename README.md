@@ -235,7 +235,7 @@ class Col extends React.Component {}
 ```
 
 
-## This all is cool... but I want to use inline styles.
+## All this is pretty cool... but I want to use inline styles.
 
 Ok, react-easy-style has support to inline-styles BUT without advanced feature like browser state/media queries.
 

@@ -105,7 +105,7 @@ class Button extends React.Component {
 <Button kind='primary' className='out1 ou2' label='...'/>
 
 // html output
-<button class='root root--kind-primary in1 in2 out1 out2'>...</button>
+<button class='Button Button--kind-primary in1 in2 out1 out2'>...</button>
 ```
 
 ##### You can make references to a nested class (using 'is' attribute)
@@ -136,7 +136,7 @@ class Button extends React.Component {
 ```scss
 // button.scss
 
-:local .root {
+:local .Button {
   .label { color: #000 }
   .desc  { font-size: 85% }
   // a lot of other styles

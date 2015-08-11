@@ -124,7 +124,7 @@ class Button extends React.Component {
 // html output
 //  don't forget, with css-modules, label and desc class names will receive unique names
 //  so... using a generic name like 'label' isn't a issue
-<button class='button button--kind-primary'>
+<button class='root root--kind-primary'>
   <span class='label'>...</span>
   <span class='desc'>...</span>
 </button>
@@ -133,7 +133,7 @@ class Button extends React.Component {
 ```scss
 // button.scss
 
-:local .root {  
+:local .root {
   .label { color: #000 }
   .desc  { font-size: 85% }
   // a lot of other styles
@@ -158,7 +158,7 @@ class Button extends React.Component {
 <Button kind='primary' label='...' desc='...' />
 
 // html output
-<button class='button button--kind-primary'>
+<button class='root root--kind-primary'>
   <span class='label'>...</span>
   <span class='desc in1 in2'>...</span>
 </button>
@@ -184,12 +184,12 @@ class Button extends React.Component {
 <Button
   labelClasses='lb1 lb2'
   labelStyle={{marginLeft: 10}}
-  rootClasses='rt1'  
+  rootClasses='rt1'
   style={{padding: 2}}
   kind='primary' label='...' desc='...' />
 
 // html output
-<button class='button button--kind-primary rt1' style='padding: 2px'>
+<button class='root root--kind-primary rt1' style='padding: 2px'>
   <span class='label lb1 lb2' style='font-size: 15px; margin-left: 10px'>...</span>
   <span class='desc'>...</span>
 </button>
@@ -210,7 +210,7 @@ class Button extends React.Component {
 
 //output
 <div class='from-tooltip'>
-  <button class='button button--kind-primary'>...</button>
+  <button class='root root--kind-primary'>...</button>
 </div>
 ```
 
@@ -259,6 +259,10 @@ export default class Button extends React.Component {
 // and its works.
 // and yet, you can use rootClasses, rootStyle, labelStyle, labelClasses, etc
 ```
+
+## What next?
+* Implement tests ;)
+* Performance
 
 ## Finally
 

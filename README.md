@@ -76,7 +76,7 @@ And finally, how to call it and its output:
 <Button kind='primary' circle={true} label='...'/>
 
 // ... you'll receive this final html
-<button class='root root--kind-success root--circle-true'>...</button>
+<button class='root root--kind-primary root--circle-true'>...</button>
 
 // ps.: On real world, css-modules will change classes names
 //  to make they unique (no more global namespace!), something like:

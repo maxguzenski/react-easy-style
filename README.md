@@ -179,7 +179,7 @@ class Button extends React.Component {
 }
 
 // call
-// ps.: for root you can use className/style or rootClasses/rootStyles or both ;)
+// ps.: for root you can use className/style or rootClasses/rootStyle or both ;)
 // all styles will be merged
 <Button
   labelClasses='lb1 lb2'

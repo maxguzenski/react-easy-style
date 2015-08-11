@@ -14,11 +14,11 @@ you'll need also:
 ## Why?
 The React community is highly fragmented when it comes to styling. Right now, there is more then 16 project for inline css on the github, all of they are trying to fix some "issue" that css has, like global scope... but, I think, they all are creating a lot of new one as well.
 
-**React Easy Style** "borrow" ideas from some one of this project: react-css (1). And join it with webpack css-loader (2) to make a very light and useful library to easy use classes and styles on react components.
+**React Easy Style** "borrow" ideas from one of those projects: react-css (1). And join it with webpack css-loader (2) to make a very light and useful library to easy use classes and styles on react components.
 
 1. [react-css](http://reactcss.com/): seems to be the only one to have noticed that style and react props/state are strong linked to each other.
 
-2. [webpack css-loader](https://github.com/webpack/css-loader): with support to [CSS Module spec](https://github.com/css-modules/css-modules) has fixed css global scope issue.
+2. [webpack css-loader](https://github.com/webpack/css-loader): with support to [CSS Module spec](https://github.com/css-modules/css-modules) that fix css global scope issue.
 
 
 ## How?
@@ -52,7 +52,7 @@ export default class Button extends React.Component {
 ```sass
 // button.scss
 
-:local .root {
+:local .Button {
   border: 1px solid transparent;
   // a lot of other styles
 
@@ -60,7 +60,7 @@ export default class Button extends React.Component {
   &:focus { outline: none; }
 
   // React props/state rules
-  //   pattern: className--propsName-propsValue
+  //   pattern: className--propsKey-propsValue
   //
   &--disabled-true { opacity: 0.65; box-shadow: none; }
   &--circle-true { border-radius: 50% }
@@ -76,7 +76,7 @@ And finally, how to call it and its output:
 <Button kind='primary' circle={true} label='...'/>
 
 // ... you'll receive this final html
-<button class='root root--kind-primary root--circle-true'>...</button>
+<button class='Button Button--kind-primary Button--circle-true'>...</button>
 
 // ps.: On real world, css-modules will change classes names
 //  to make they unique (no more global namespace!), something like:
@@ -108,7 +108,7 @@ class Button extends React.Component {
 <button class='root root--kind-primary in1 in2 out1 out2'>...</button>
 ```
 
-##### You can make references to a nested class (use 'is')
+##### You can make references to a nested class (using 'is' attribute)
 ```javascript
 class Button extends React.Component {
   render() {
@@ -127,7 +127,7 @@ class Button extends React.Component {
 // html output
 //  don't forget, with css-modules, label and desc class names will receive unique names
 //  so... using a generic name like 'label' isn't a issue
-<button class='root root--kind-primary'>
+<button class='Button Button--kind-primary'>
   <span class='label'>...</span>
   <span class='desc'>...</span>
 </button>
@@ -161,7 +161,7 @@ class Button extends React.Component {
 <Button kind='primary' label='...' desc='...' />
 
 // html output
-<button class='root root--kind-primary'>
+<button class='Button Button--kind-primary'>
   <span class='label'>...</span>
   <span class='desc in1 in2'>...</span>
 </button>
@@ -192,7 +192,7 @@ class Button extends React.Component {
   kind='primary' label='...' desc='...' />
 
 // html output
-<button class='root root--kind-primary rt1' style='padding: 2px'>
+<button class='Button Button--kind-primary rt1' style='padding: 2px'>
   <span class='label lb1 lb2' style='font-size: 15px; margin-left: 10px'>...</span>
   <span class='desc'>...</span>
 </button>
@@ -213,48 +213,34 @@ class Button extends React.Component {
 
 //output
 <div class='from-tooltip'>
-  <button class='root root--kind-primary'>...</button>
+  <button class='Button Button--kind-primary'>...</button>
 </div>
 ```
 
 ##### If you want/have to change top-level class name
+
+By default Easy Style will try to find a class with same name of component, or one called 'root'.
+But you can pass a new name as well.
+
 ```javascript
 // grid.jsx
 
-@EasyStyle( css, 'container')
+@EasyStyle(css, 'myContainer')
 class Container extends React.Component {}
-
-@EasyStyle( css, 'row')
-class Row extends React.Component {}
-
-@EasyStyle( css, 'col')
-class Col extends React.Component {}
 ```
 ```scss
 // grid.scss
-:local .container { /** ... **/ }
-:local .row { /** ... **/ }
-:local .col { /** ... **/ }
+// acceptable top-level class names are:
+
+:local .myContainer { /** ... **/ }
+:local .Container { /** ... **/ }
+:local .root { /** ... **/ }
 ```
-
-## Example of webpack config to use css-loader
-
-```javascript
-// webpack.config.js
-module: {
-  loaders: [
-    { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: 'babel?stage=0' },
-    { test: /\.scss$/, loader: "style!css!sass" },
-    { test: /\.css$/, loader: "style!css" }
-  ]
-}
-```
-
 
 
 ## All this is pretty cool... but I want to use inline styles.
 
-Ok, react-easy-style has support to inline-styles BUT without advanced feature like browser state/media queries.
+Ok, React Easy Style has support to inline styles BUT without fancy feature like browser state and media queries.
 
 How to use it:
 
@@ -300,7 +286,8 @@ export default class Button extends React.Component {
 
 ## What next?
 * Implement tests ;)
-* Performance
+* Review performance (it already is very fast, but can it be more?)
+* Support themes, may by using react context
 
 ## Finally
 

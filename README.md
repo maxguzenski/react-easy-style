@@ -1,110 +1,265 @@
-# Stylium
+# react-easy-style
 
-Utility for making React components play nice with css.
+A tiny library to easy apply css/styles to react components.
 
-**This project is still totally experimental, so feedback from component authors would be greatly appreciated!**
+**This project very young, so feedback from component authors would be greatly appreciated!**
 
-##Why?
-The React community is highly fragmented when it comes to styling. Right now, there is more then 16 project for inline css on the github, all of they are trying to fix some "issue" that css has, like global scope... but they all are creating a lot of new one as well, and some are even worse.
+## Install
 
-After all there's two project that came with very cool ideas: 
+`npm install react-easy-style`
 
-1) [ReactCSS](http://reactcss.com/) that looks like to be the only one that notice that style and react props/state are very tight one to another.  
+## Why?
+The React community is highly fragmented when it comes to styling. Right now, there is more then 16 project for inline css on the github, all of they are trying to fix some "issue" that css has, like global scope... but, I think, they all are creating a lot of new one as well.
 
-2) [css-modules](https://github.com/css-modules/css-modules), that without loose the power of css, fixed global scope issue.
+1. [react-css](http://reactcss.com/): seems to be the only one to have noticed that style and react props / state are very linked to each other.
 
-This project try to put to gather reactccss and css-modules into a simple and very small library.   
+2. [webpack css-loader](https://github.com/webpack/css-loader): with suport to [CSS Module spec](https://github.com/css-modules/css-modules) fix global scope issue on css files.
+
+This project "borrow" ideas from react-css and join with webpack css-loader to make a very light and useful library to react components deal with css classes and styles.
 
 
-##How? 
+## How?
 
-Create your css/sass/less normally, using :local from css-modules:
+Take a look!
 
+```javascript
+// button.jsx
+
+import React from 'react'
+import EasyStyle from 'react-easy-style'
+
+// import css/scss/less using webpack css-loader
+import css from './button.scss'
+
+@EasyStyle( css )
+export default class Button extends React.Component {
+  static defaultProps = {
+    kind: 'primary'
+  }
+
+  render() {
+    return <button>{ this.props.label }</button>
+  }
+}
+
+// if you not use decorators, you can just use like that:
+//   class Button extends React.component { ... }
+//   export default EasyStyle(css)(Button)
+```
 ```sass
+// button.scss
+
 :local .root {
   border: 1px solid transparent;
   // a lot of other styles
 
   // browser state rules
-  &:focus,
-  &:hover { text-decoration: none; }
   &:focus { outline: none; }
 
   // React props/state rules
   //   final result: root--propsName-propsValue
-  //   use sample: <Button disabled={true} size='lg' circle={true} />
   //
   &--disabled-true { opacity: 0.65; box-shadow: none; }
   &--circle-true { border-radius: 50% }
-  
+
   &--kind-default { /*...*/ }
   &--kind-primary { /*...*/ }
   &--kind-success { /*...*/ }
-
-  &--size-lg { /*...*/ }
-  &--size-sm { /*...*/ }
-  &--size-xs { /*...*/ }
 }
 ```
+And finally, how to call and it output:
+```javascript
+// when you call
+<Button kind='primary' circle={true} label='...'/>
 
-Now just implement your React component using Stylium decoration:
+// you'll receive this final html
+<button class='root root--kind-success root--circle-true'>...</button>
+
+// ps.: On real world, css-modules will change classes names
+//  to make they unique (no more global namespace!), something like:
+<button class='jduei3dfu3d_Kjm jduei3dfu3d_Kjm-2e jduei3dfu3d_Kjm-43'>...</button>
+
+```
+
+And that is it. seriously!
+
+For small/medium components you will end up with 0 (zero) css references on you code. For more complex components, please keep reading ;-)
+
+
+## Other examples
+
+##### When you need pass internal and external classNames...
+```javascript
+class Button extends React.Component {
+  render() {
+    return (
+      <button className='in1 in2'>{this.props.label}</button>
+    )
+  }
+}
+
+// call
+<Button kind='primary' className='out1 ou2' label='...'/>
+
+// html output
+<button class='button button--kind-primary in1 in2 out1 out2'>...</button>
+```
+
+##### You can make references to a nested class (use 'is')
+```javascript
+class Button extends React.Component {
+  render() {
+    return (
+      <button>
+        <span is='label'>{this.props.label}</span>
+        <span is='desc'>{this.props.desc}</span>
+      </button>
+    )
+  }
+}
+
+// call
+<Button kind='primary' label='...' desc='...' />
+
+// html output
+//  don't forget, with css-modules, label and desc class names will receive unique names
+//  so... using a generic name like 'label' isn't a issue
+<button class='button button--kind-primary'>
+  <span class='label'>...</span>
+  <span class='desc'>...</span>
+</button>
+
+```
+```scss
+// button.scss
+
+:local .root {  
+  .label { color: #000 }
+  .desc  { font-size: 85% }
+  // a lot of other styles
+}
+
+```
+
+##### Your nested elements will be merged with other classes as expected
+```javascript
+class Button extends React.Component {
+  render() {
+    return (
+      <button>
+        <span is='label'>{this.props.label}</span>
+        <span is='desc' className='in1 in2'>{this.props.desc}</span>
+      </button>
+    )
+  }
+}
+
+// call
+<Button kind='primary' label='...' desc='...' />
+
+// html output
+<button class='button button--kind-primary'>
+  <span class='label'>...</span>
+  <span class='desc in1 in2'>...</span>
+</button>
+```
+
+
+##### Your root and nested elements can receive classes and styles (themable!)
+```javascript
+class Button extends React.Component {
+  render() {
+    return (
+      <button>
+        <span is='label' style={{fontSize: 15}}>{this.props.label}</span>
+        <span is='desc'>{this.props.desc}</span>
+      </button>
+    )
+  }
+}
+
+// call
+// ps.: for root you can use className/style or rootClasses/rootStyles or both ;)
+// all styles will be merged
+<Button
+  labelClasses='lb1 lb2'
+  labelStyle={{marginLeft: 10}}
+  rootClasses='rt1'  
+  style={{padding: 2}}
+  kind='primary' label='...' desc='...' />
+
+// html output
+<button class='button button--kind-primary rt1' style='padding: 2px'>
+  <span class='label lb1 lb2' style='font-size: 15px; margin-left: 10px'>...</span>
+  <span class='desc'>...</span>
+</button>
+```
+
+##### If your top-level element is not your root element, use is='root'
+```javascript
+class Button extends React.Component {
+  render() {
+    return (
+      <ToolTip<button is='root'>...</button></ToolTip>
+    )
+  }
+}
+
+// call
+<Button kind='primary' label='...' />
+
+//output
+<div class='from-tooltip'>
+  <button class='button button--kind-primary'>...</button>
+</div>
+```
+
+## This all is cool... but I want to use inline styles.
+
+Ok, react-easy-style has support to inline-styles BUT without advanced feature like browser state/media queries.
+
+How to use it:
 
 ```javascript
-import css from './button.scss'
-import React from 'react'
-import Stylium from '../stylium'
 
-@Stylium( css )
+const style = {
+  'default': {
+    root: { padding: 2, /**...**/ },
+    label: { /**...**/ },
+    desc: { /**...**/ }
+  },
+  'kind-primary': {
+    root: { /**...**/ },
+    label: { /**...**/ },
+    desc: { /**...**/ }
+  },
+  'circle-true': {
+    root: { /**...**/ },
+    label: { /**...**/ },
+    desc: { /**...**/ }
+  }
+}
+
+@EasyStyle( style )
 export default class Button extends React.Component {
   static defaultProps = {
-    size: 'sm', kind: 'primary'
-  }
-
-  onClick = (e) => {
-    if (e) { e.preventDefault() }
-    if (this.props.onClick) { this.props.onClick() }
+    kind: 'primary'
   }
 
   render() {
-    return <button onClick={this.onClick}>{ this.props.children }</button>
+    return (
+      <button>
+        <span is='label'>{this.props.label}</span>
+        <span is='desc'>{this.props.desc}</span>
+      </button>
+    )
   }
 }
+
+// and its works.
+// and yet, you can use rootClasses, rootStyle, labelStyle, labelClasses, etc
 ```
 
-And that is it!! seriously! 
+## Finally
 
-For small components you will have zero classname references, for medium/large ones you can combine stylium  and regular className={css.elemenClass}
-
-Output will be something like:
-
-```jsx
-// for <Button circle={true} kind='success' size='lg' />
-// in the real world, css-module will change classname to something uniq like 'aseewfnjkc'
-<button class='root root--kind-success root-size-lg root--circle-true'>...</button>
-```
-
-
-##Future?
-Right now, I'm updating a medium size project using this concept, along the way I'll commit new features and ideas. Maybe Stylium could does something like this:
-
-```javascript
-// ref your nested components with react.refs
-<div ref='root'>
-  <div ref='nested1'/>
-  <div ref='nested2'/>
-</div>
-
-// Then you can let other calls your component like that:
-<Component rootClass='home withicons' rootStyles={padding: 2} nested1Style={color: '#ccc'} />
-
-//
-// and stylium garantee that all class (from css or from properties) and styles goes to correct elements.
-//
-```
-
-**Please, if you like, talk to me and help!**
-
-ps.: I know, project name sucks! But I think that all cool names was taken...maybe I'll change it to 'react-got-style', I don't know...
-
-
-
+**If you like it, please help!!**

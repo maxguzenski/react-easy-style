@@ -1,0 +1,35 @@
+{
+  "name": "react-easy-style",
+  "version": "0.0.1",
+  "description": "A tiny library to easy apply css/styles to react components",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxguzenski/react-easy-style.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "css",
+    "inline",
+    "style",
+    "styles"
+  ],
+  "author": "Maximiliano Guzenski <maxguzenski@gmail.com> (http://github.com/maxguzenski)",
+  "homepage": "https://github.com/maxguzenski/react-easy-style",
+  "bugs": "https://github.com/maxguzenski/react-easy-style/issues",
+  "scripts": {
+    "build": "babel --stage 0 src/ -d lib/",
+    "prepublish": "rm -Rf lib/ && npm run build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "~2.1.3"
+  },
+  "devDependencies": {
+    "babel": "^5.5.8",
+    "babel-core": "5.8.22",
+    "babel-loader": "^5.1.4",
+    "react": "0.13.3"
+  }
+}

@@ -107,7 +107,7 @@ export default function EasyStyle(styleOrClass, rootName='root') {
     }
 
     const propsIfStyle = isClass ? {} : {
-      ...( styleOrClass['default'] && styleOrClass['default'][isName] ),
+      ...( styleOrClass['base'] && styleOrClass['base'][isName] ),
       ...( mergePropsKlzz() )
     }
 

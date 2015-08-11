@@ -67,7 +67,7 @@ export default class Button extends React.Component {
   &--kind-success { /*...*/ }
 }
 ```
-And finally, how to call and it output:
+And finally, how to call it and its output:
 ```javascript
 // when you call
 <Button kind='primary' circle={true} label='...'/>
@@ -102,7 +102,7 @@ class Button extends React.Component {
 <Button kind='primary' className='out1 ou2' label='...'/>
 
 // html output
-<button class='button button--kind-primary in1 in2 out1 out2'>...</button>
+<button class='root root--kind-primary in1 in2 out1 out2'>...</button>
 ```
 
 ##### You can make references to a nested class (use 'is')
@@ -244,7 +244,7 @@ How to use it:
 ```javascript
 
 const style = {
-  'default': {
+  base: {
     root: { padding: 2, /**...**/ },
     label: { /**...**/ },
     desc: { /**...**/ }

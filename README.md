@@ -214,6 +214,27 @@ class Button extends React.Component {
 </div>
 ```
 
+##### If you want/have to change top-level class name
+```javascript
+// grid.jsx
+
+@EasyStyle( css, 'container')
+class Container extends React.Component {}
+
+@EasyStyle( css, 'row')
+class Row extends React.Component {}
+
+@EasyStyle( css, 'col')
+class Col extends React.Component {}
+```
+```scss
+// grid.scss
+:local .container { /** ... **/ }
+:local .row { /** ... **/ }
+:local .col { /** ... **/ }
+```
+
+
 ## This all is cool... but I want to use inline styles.
 
 Ok, react-easy-style has support to inline-styles BUT without advanced feature like browser state/media queries.

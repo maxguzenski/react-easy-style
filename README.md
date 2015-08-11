@@ -70,7 +70,11 @@ export default class Button extends React.Component {
   &--kind-success { /*...*/ }
 }
 ```
-And finally, how to call it and its output:
+And that is it. seriously!! <br/>
+For small/medium components you will end up with 0 (zero) css references on you code.
+
+Here a example of how to call it and its output:
+
 ```javascript
 // when you call
 <Button kind='primary' circle={true} label='...'/>
@@ -83,15 +87,12 @@ And finally, how to call it and its output:
 <button class='jduei3dfu3d_Kjm jduei3dfu3d_Kjm-2e jduei3dfu3d_Kjm-43'>...</button>
 
 ```
-
-And that is it. seriously!
-
-For small/medium components you will end up with 0 (zero) css references on you code. For more complex components, please keep reading ;-)
+ For more complex components, please, keep reading ;-)
 
 
 ## Other examples
 
-##### When you need pass internal and external classNames...
+#### When you need pass internal and external classNames...
 ```javascript
 class Button extends React.Component {
   render() {
@@ -108,7 +109,7 @@ class Button extends React.Component {
 <button class='Button Button--kind-primary in1 in2 out1 out2'>...</button>
 ```
 
-##### You can make references to a nested class (using 'is' attribute)
+#### You can make references to a nested class (using 'is' attribute)
 ```javascript
 class Button extends React.Component {
   render() {
@@ -144,14 +145,14 @@ class Button extends React.Component {
 
 ```
 
-##### Your nested elements will be merged with other classes as expected
+#### Classes and styles defined on nested element will be merged as well
 ```javascript
 class Button extends React.Component {
   render() {
     return (
       <button>
         <span is='label'>{this.props.label}</span>
-        <span is='desc' className='in1 in2'>{this.props.desc}</span>
+        <span is='desc' className='in1 in2' style={{fontSize:12}}>{this.props.desc}</span>
       </button>
     )
   }
@@ -163,18 +164,23 @@ class Button extends React.Component {
 // html output
 <button class='Button Button--kind-primary'>
   <span class='label'>...</span>
-  <span class='desc in1 in2'>...</span>
+  <span class='desc in1 in2' style='font-size: 12px'>...</span>
 </button>
 ```
 
 
-##### Your root and nested elements can receive classes and styles (themable!)
+#### Your root and nested elements can receive classes and styles from outside
+
+To nested elements that use, for example, is='label' you'll have labelClasses='class1' and labelStyle={{...}}.
+for top-level element (root) you have rootClasses, rootStyles, className and style.
+In another word: Themeable for free.
+
 ```javascript
 class Button extends React.Component {
   render() {
     return (
       <button>
-        <span is='label' style={{fontSize: 15}}>{this.props.label}</span>
+        <span is='label'>{this.props.label}</span>
         <span is='desc'>{this.props.desc}</span>
       </button>
     )
@@ -188,17 +194,18 @@ class Button extends React.Component {
   labelClasses='lb1 lb2'
   labelStyle={{marginLeft: 10}}
   rootClasses='rt1'
+  className='cn1'
   style={{padding: 2}}
   kind='primary' label='...' desc='...' />
 
 // html output
-<button class='Button Button--kind-primary rt1' style='padding: 2px'>
-  <span class='label lb1 lb2' style='font-size: 15px; margin-left: 10px'>...</span>
+<button class='Button Button--kind-primary rt1 cn1' style='padding: 2px'>
+  <span class='label lb1 lb2' style='margin-left: 10px'>...</span>
   <span class='desc'>...</span>
 </button>
 ```
 
-##### If your top-level element is not your root element, use is='root'
+#### If your top-level element is not your root element, use is='root'
 ```javascript
 class Button extends React.Component {
   render() {
@@ -217,14 +224,13 @@ class Button extends React.Component {
 </div>
 ```
 
-##### If you want/have to change top-level class name
+#### If you want/have to change top-level class name
 
 By default Easy Style will try to find a class with same name of component, or one called 'root'.
 But you can pass a new name as well.
 
 ```javascript
 // grid.jsx
-
 @EasyStyle(css, 'myContainer')
 class Container extends React.Component {}
 ```

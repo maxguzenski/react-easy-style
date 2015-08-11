@@ -11,7 +11,7 @@ A tiny library to easy apply css/styles to react components.
 ## Why?
 The React community is highly fragmented when it comes to styling. Right now, there is more then 16 project for inline css on the github, all of they are trying to fix some "issue" that css has, like global scope... but, I think, they all are creating a lot of new one as well.
 
-1. [react-css](http://reactcss.com/): seems to be the only one to have noticed that style and react props / state are very linked to each other.
+1. [react-css](http://reactcss.com/): seems to be the only one to have noticed that style and react props/state are strong linked to each other.
 
 2. [webpack css-loader](https://github.com/webpack/css-loader): with support to [CSS Module spec](https://github.com/css-modules/css-modules) has fixed css global scope issue.
 

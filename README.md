@@ -13,9 +13,9 @@ The React community is highly fragmented when it comes to styling. Right now, th
 
 1. [react-css](http://reactcss.com/): seems to be the only one to have noticed that style and react props / state are very linked to each other.
 
-2. [webpack css-loader](https://github.com/webpack/css-loader): with suport to [CSS Module spec](https://github.com/css-modules/css-modules) fix global scope issue on css files.
+2. [webpack css-loader](https://github.com/webpack/css-loader): with support to [CSS Module spec](https://github.com/css-modules/css-modules) has fixed css global scope issue.
 
-This project "borrow" ideas from react-css and join with webpack css-loader to make a very light and useful library to react components deal with css classes and styles.
+This project "borrow" ideas from react-css and join with webpack css-loader to make a very light and useful library to easy use classes and styles on react components.
 
 
 ## How?
@@ -42,7 +42,7 @@ export default class Button extends React.Component {
   }
 }
 
-// if you not use decorators, you can just use like that:
+// if you don't use decorators:
 //   class Button extends React.component { ... }
 //   export default EasyStyle(css)(Button)
 ```
@@ -57,7 +57,7 @@ export default class Button extends React.Component {
   &:focus { outline: none; }
 
   // React props/state rules
-  //   final result: root--propsName-propsValue
+  //   pattern: className--propsName-propsValue
   //
   &--disabled-true { opacity: 0.65; box-shadow: none; }
   &--circle-true { border-radius: 50% }
@@ -72,7 +72,7 @@ And finally, how to call and it output:
 // when you call
 <Button kind='primary' circle={true} label='...'/>
 
-// you'll receive this final html
+// ... you'll receive this final html
 <button class='root root--kind-success root--circle-true'>...</button>
 
 // ps.: On real world, css-modules will change classes names

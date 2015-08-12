@@ -85,7 +85,7 @@ export default function EasyStyle(styleOrClass, _rootName) {
                      'root'
 
     // if ((isClass && !styleOrClass[rootName]) || (!isClass && !styleOrClass['base']['root'])) {
-    //   throw `Any rootName was found! searched by ${_rootName} / ${dispName} / root`
+    //   throw new Error(`Any rootName was found! searched by ${_rootName} / ${dispName} / root`)
     // }
 
     const getClassesAndStyles = function(node, isRoot) {

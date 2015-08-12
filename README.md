@@ -174,7 +174,7 @@ class Button extends React.Component {
 #### Your root and nested elements can receive classes and styles from outside
 
 To nested elements that use, for example, is='label' you'll have labelClasses='class1' and labelStyle={{...}}.
-for top-level element (root) you have rootClasses, rootStyles, className and style.
+for top-level element (root) you have rootClasses, rootStyle, className and style.
 In another word: Themeable for free.
 
 ```javascript
@@ -229,7 +229,7 @@ class Button extends React.Component {
 #### If you want/have to change top-level class name
 
 By default Easy Style will try to find a class with same name of component, or one called 'root'.
-But you can pass a new name as well.
+But you can pass a new one.
 
 ```javascript
 // grid.jsx
@@ -238,7 +238,7 @@ class Container extends React.Component {}
 ```
 ```scss
 // grid.scss
-// acceptable top-level class names are:
+// easy style will find classes in this order (and use the first found):
 
 :local .myContainer { /** ... **/ }
 :local .Container { /** ... **/ }
@@ -248,9 +248,8 @@ class Container extends React.Component {}
 
 ## All this is pretty cool... but I want to use inline styles.
 
-Ok, React Easy Style has support to inline styles BUT without fancy feature like browser state and media queries.
-
-How to use it:
+Ok, React Easy Style has support to inline styles BUT without fancy feature like browser state or media queries.
+Let's see:
 
 ```javascript
 
@@ -288,14 +287,14 @@ export default class Button extends React.Component {
   }
 }
 
-// and its works.
-// and yet, you can use rootClasses, rootStyle, labelStyle, labelClasses, etc
+// and it just works.
+// and you can use rootClasses, rootStyle, labelStyle, labelClasses, etc...
 ```
 
 ## What next?
 * ~~Implement tests ;)~~
-* Review performance (it already is very fast, but can it be more?)
-* Support themes, may by using react context
+* Benchmark performance (it's very fast, but maybe it can be more)
+* Support themes, maybe using react context
 
 ## Finally
 

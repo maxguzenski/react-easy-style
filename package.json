@@ -1,6 +1,6 @@
 {
   "name": "react-easy-style",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A tiny library to easy apply css/styles to react components",
   "main": "lib/index.js",
   "repository": {
@@ -20,6 +20,8 @@
   "bugs": "https://github.com/maxguzenski/react-easy-style/issues",
   "scripts": {
     "build": "babel --stage 0 src/ -d lib/",
+    "test": "mocha  --compilers js:babel/register --recursive",
+    "test:watch": "mocha  --compilers js:babel/register --recursive --watch",
     "prepublish": "rm -Rf lib/ && npm run build"
   },
   "license": "MIT",
@@ -30,6 +32,10 @@
     "babel": "^5.5.8",
     "babel-core": "5.8.22",
     "babel-loader": "^5.1.4",
+    "expect": "latest",
+    "jsdom": "^6.1.0",
+    "mocha": "latest",
+    "mocha-jsdom": "^1.0.0",
     "react": "0.13.3"
   }
 }

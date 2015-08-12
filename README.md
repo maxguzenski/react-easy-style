@@ -37,7 +37,7 @@ import css from './button.scss'
 @EasyStyle( css )
 export default class Button extends React.Component {
   static defaultProps = {
-    kind: 'primary'
+    kind: 'default', circle: false
   }
 
   render() {
@@ -60,9 +60,8 @@ export default class Button extends React.Component {
   &:focus { outline: none; }
 
   // React props/state rules
-  //   pattern: className--propsKey-propsValue
-  //
-  &--disabled-true { opacity: 0.65; box-shadow: none; }
+  //  pattern: className--propsKey-propsValue
+
   &--circle-true { border-radius: 50% }
 
   &--kind-default { /*...*/ }
@@ -210,7 +209,7 @@ class Button extends React.Component {
 class Button extends React.Component {
   render() {
     return (
-      <ToolTip<button is='root'>...</button></ToolTip>
+      <ToolTip><button is='root'>...</button></ToolTip>
     )
   }
 }
@@ -291,7 +290,7 @@ export default class Button extends React.Component {
 ```
 
 ## What next?
-* Implement tests ;)
+* ~~Implement tests ;)~~
 * Review performance (it already is very fast, but can it be more?)
 * Support themes, may by using react context
 

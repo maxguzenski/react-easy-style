@@ -81,9 +81,9 @@ export default function EasyStyle(styleOrClass, _rootName) {
 
     const rootName = (styleOrClass[_rootName] && _rootName) ||
                      (styleOrClass[dispName] && dispName) ||
-                     (styleOrClass['root'] && 'root')
+                     'root'
 
-    if (!rootName) {
+    if ((isClass && !styleOrClass[rootName]) || (!isClass && !styleOrClass['base']['root'])) {
       throw `Any rootName was found! searched by ${_rootName} / ${dispName} / root`
     }
 

@@ -79,13 +79,14 @@ export default function EasyStyle(styleOrClass, _rootName) {
   return DecoredComponent => {
     const dispName = getDisplayName(DecoredComponent)
 
-    const rootName = (styleOrClass[_rootName] && _rootName) ||
+    const rootName = (!isClass && 'root') ||
+                     (styleOrClass[_rootName] && _rootName) ||
                      (styleOrClass[dispName] && dispName) ||
                      'root'
 
-    if ((isClass && !styleOrClass[rootName]) || (!isClass && !styleOrClass['base']['root'])) {
-      throw `Any rootName was found! searched by ${_rootName} / ${dispName} / root`
-    }
+    // if ((isClass && !styleOrClass[rootName]) || (!isClass && !styleOrClass['base']['root'])) {
+    //   throw `Any rootName was found! searched by ${_rootName} / ${dispName} / root`
+    // }
 
     const getClassesAndStyles = function(node, isRoot) {
       const is = node.props.is
@@ -104,8 +105,7 @@ export default function EasyStyle(styleOrClass, _rootName) {
         const allProps = {...this.state, ...this.props}
 
         for (let k in allProps) {
-          const v  = allProps[k]
-          const sp = getStyleProp(k, v)
+          const sp = getStyleProp(k, allProps[k])
           sp && propsKlzz.push(sp)
         }
       }
@@ -125,16 +125,9 @@ export default function EasyStyle(styleOrClass, _rootName) {
       // ok, let see styles now
       //
 
-      const propsKlzzReducer = () => {
-        return propsKlzz.reduce( (memo, item) => {
-          memo = {...memo, ...item}
-          return memo
-        }, {})
-      }
-
       const propsIfStyle = isClass ? {} : {
         ...( styleOrClass['base'] && styleOrClass['base'][isName] ),
-        ...( propsKlzzReducer() )
+        ...( propsKlzz.reduce((m, i) => { return {...m, ...i}}, {}) )
       }
 
       const style = {

@@ -139,7 +139,10 @@ class Button extends React.Component {
 :local .Button {
   .label { color: #000 }
   .desc  { font-size: 85% }
-  // a lot of other styles
+
+  // and into your states...
+  .&--kind-primary .label {}
+  .&--kind-primary .desc {}
 }
 
 ```

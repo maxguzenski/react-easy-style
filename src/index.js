@@ -73,20 +73,16 @@ function tranverse(node, level=0, getClasesAndStyles) {
 }
 
 
-export default function EasyStyle(styleOrClass, _rootName) {
+export default function EasyStyle(styleOrClass={}, _rootName) {
   const isClass = isClassNames(styleOrClass)
 
   return DecoredComponent => {
     const dispName = getDisplayName(DecoredComponent)
 
     const rootName = (!isClass && 'root') ||
-                     (styleOrClass[_rootName] && _rootName) ||
-                     (styleOrClass[dispName] && dispName) ||
+                     (styleOrClass && styleOrClass[_rootName] && _rootName) ||
+                     (styleOrClass && styleOrClass[dispName] && dispName) ||
                      'root'
-
-    // if ((isClass && !styleOrClass[rootName]) || (!isClass && !styleOrClass['base']['root'])) {
-    //   throw new Error(`Any rootName was found! searched by ${_rootName} / ${dispName} / root`)
-    // }
 
     const getClassesAndStyles = function(node, isRoot) {
       const is = node.props.is

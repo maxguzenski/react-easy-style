@@ -1,6 +1,6 @@
 # React Easy Style
 
-A tiny library to easy apply css/styles to react components.
+Style your react component with **zero references** to your css classes or to inline-styles.
 
 **This project very young, so feedback from component authors would be greatly appreciated!**
 
@@ -31,7 +31,8 @@ Take a look!
 import React from 'react'
 import EasyStyle from 'react-easy-style'
 
-// import css/scss/less using webpack css-loader
+// import css/scss/less with webpack css-loader
+// webpack.config sample loaders: [{test: /\.scss$/, loader: "style!css!sass" }]
 import css from './button.scss'
 
 @EasyStyle( css )
@@ -69,8 +70,7 @@ export default class Button extends React.Component {
   &--kind-success { /*...*/ }
 }
 ```
-And that is it. seriously!! <br/>
-For small/medium components you will end up with 0 (zero) css references on you code.
+And that is it. Seriously! For small/medium components you will end up with 0 (zero) css references on you code.
 
 Here a example of how to call it and its output:
 

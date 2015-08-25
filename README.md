@@ -1,8 +1,6 @@
 # React Easy Style
 
-Style your react component with **zero references** to your css classes or to inline-styles.
-
-**This project very young, so feedback from component authors would be greatly appreciated!**
+A tiny library to easy apply css/styles to react components with **zero references** to your css classes or to inline-styles.
 
 ## Install
 

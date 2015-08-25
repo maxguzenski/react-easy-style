@@ -1,6 +1,6 @@
 {
   "name": "react-easy-style",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "A tiny library to easy apply css/styles to react components",
   "main": "lib/index.js",
   "repository": {

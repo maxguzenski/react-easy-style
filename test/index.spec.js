@@ -118,7 +118,6 @@ describe('index', () => {
 
     it('should has label class', () => {
       const node = TestUtils.renderIntoDocument(<Button />)
-      console.log(node.refs.lb.className)
       expect(node.refs.lb.className).toEqual('label  in1')
       expect(node.refs.lb.style.margin).toEqual('1px')
     })

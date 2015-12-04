@@ -1,5 +1,6 @@
 
 import React from 'react'
+import cloneWithProps from 'react-addons-clone-with-props'
 import cx from 'classnames'
 
 
@@ -58,7 +59,7 @@ function tranverse(node, level=0, getClasesAndStyles) {
 
     return [
       isNodeRoot,
-      React.cloneElement(node, _p, newChildren)
+      React.cloneElement(node, {is: null, ..._p}, newChildren)
     ]
   }
 
